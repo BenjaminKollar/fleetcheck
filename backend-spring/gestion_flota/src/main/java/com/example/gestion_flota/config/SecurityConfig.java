@@ -11,9 +11,10 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(csrf -> csrf.disable()) // Deshabilitado para pruebas locales de API REST
+                .csrf(csrf -> csrf.disable()) // Deshabilitado para pruebas locales en postman/intellij
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/**").permitAll()
+                        .requestMatchers("/api/auth/**").permitAll()      // Permite el login libre
+                        .requestMatchers("/api/vehiculos/**").permitAll() // Mantiene libre tu endpoint de vehículos
                         .anyRequest().authenticated()
                 );
         return http.build();

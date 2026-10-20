@@ -1,0 +1,41 @@
+### 1. Prueba Login Fallido (Error 401)
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "correo": "admin@fleetcheck.cl",
+  "password": "clave_mala"
+}
+
+### 2. Prueba Login Exitoso (200 OK)
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "correo": "admin@fleetcheck.cl",
+  "password": "admin123"
+}
+
+### 3. Prueba Error de Roles (403 Forbidden)
+POST http://localhost:8080/api/auth/accion-restringida
+Rol: EMPRESARIO
+
+### 4. Crear Vehículo (201 Created)
+POST http://localhost:8080/api/vehiculos
+Content-Type: application/json
+
+{
+  "patente": "ABCD12",
+  "tipo": "Camion",
+  "responsable": "Juan Perez"
+}
+
+### 5. Prueba Patente Duplicada (Error 409 Conflict)
+POST http://localhost:8080/api/vehiculos
+Content-Type: application/json
+
+{
+  "patente": "ABCD12",
+  "tipo": "Camion",
+  "responsable": "Juan Perez"
+}
